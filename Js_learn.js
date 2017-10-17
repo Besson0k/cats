@@ -1,27 +1,24 @@
-function makeArmy() {
-
-    var shooters = [];
-    var unis = 'Unis';
-
-    for (var i = 0; i < 10; i++) {
-        var makeShooter = function () {
-
-            var a = i;
-            return function () {
-                console.log(unis);
-                alert(a);
-            }
-        };
-        shooters.push(makeShooter());
+function makeBuffer() {
+    var value = '';
+    function buffer (piece) {
+        if (arguments.length === 0) {
+            return value;
+        }
+        value += piece;
     }
-    debugger;
-    console.log('i = ', i);
-    return shooters;
+    buffer.clear = function() {
+      value = '';
+    };
+    return buffer;
 }
 
-var army = makeArmy();
-// i == 10
+var buffer = makeBuffer();
 
-army[0]();
-army[5]();
-( function(x) {console.log(x);} )(123);
+
+buffer("Тест");
+buffer(" тебя не съест ");
+alert( buffer() ); // Тест тебя не съест
+
+buffer.clear();
+
+alert( buffer() );
