@@ -1,19 +1,27 @@
-var expr, res;
+function makeArmy() {
 
-while (true) {
-    expr = prompt("Введите выражение?", '2-');
-    if (expr == null) break;
+    var shooters = [];
+    var unis = 'Unis';
 
-    try {
-        res = eval(expr);
-        if (isNaN(res)) {
-            throw new Error("Результат неопределён");
-        }
+    for (var i = 0; i < 10; i++) {
+        var makeShooter = function () {
 
-        break;
-    } catch (e) {
-        alert( "Ошибка: " + e.message + ", повторите ввод" );
+            var a = i;
+            return function () {
+                console.log(unis);
+                alert(a);
+            }
+        };
+        shooters.push(makeShooter());
     }
+    debugger;
+    console.log('i = ', i);
+    return shooters;
 }
 
-alert( res );
+var army = makeArmy();
+// i == 10
+
+army[0]();
+army[5]();
+( function(x) {console.log(x);} )(123);
