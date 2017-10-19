@@ -1,17 +1,16 @@
-var ladder = {
-    step: 0,
-    up: function() {
-        this.step++;
-        return this;
-    },
-    down: function() {
-        this.step--;
-        return this;
-    },
-    showStep: function() {
-        alert( this.step );
-        return this;
+function sum(a) {
+    var correctSum = a;
+    function f(b) {
+        correctSum +=b;
+        return f;
     }
-};
+    f.toString = function() {
+        return correctSum;
+    };
+    return f;
+}
 
-ladder.up().up().down().up().down().showStep();
+alert( sum(1)(2) );
+alert( sum(5)(-1)(2) );
+alert( sum(6)(-1)(-2)(-3) );
+alert( sum(0)(1)(2)(3)(4)(5) );
