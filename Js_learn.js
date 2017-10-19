@@ -1,16 +1,14 @@
-function sum(a) {
-    var correctSum = a;
-    function f(b) {
-        correctSum +=b;
-        return f;
+function User(firstName, lastName) {
+    var phrase = "Hi";
+
+    function getFullName() {
+        return firstName + " " + lastName;
     }
-    f.toString = function() {
-        return correctSum;
+    this.sayHi = function() {
+        alert(phrase + ", " + getFullName() );
     };
-    return f;
 }
 
-alert( sum(1)(2) );
-alert( sum(5)(-1)(2) );
-alert( sum(6)(-1)(-2)(-3) );
-alert( sum(0)(1)(2)(3)(4)(5) );
+var vasya = new User ("Vasya", "Pupkin");
+vasya.sayHi();
+
