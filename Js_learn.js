@@ -1,14 +1,16 @@
-function User(firstName, lastName) {
-    var phrase = "Hi";
-
-    function getFullName() {
-        return firstName + " " + lastName;
-    }
-    this.sayHi = function() {
-        alert(phrase + ", " + getFullName() );
+function Calculator(a, b) {
+    this.read = function() {
+        this.a = +prompt("a?", 0);
+        this.b = +prompt("b?", 0);
     };
+    this.sum = function() {
+        return this.a + this.b;
+    } ;
+    this.mul = function() {
+        return this.a * this.b;
+    }
 }
-
-var vasya = new User ("Vasya", "Pupkin");
-vasya.sayHi();
-
+var calculator = new Calculator();
+calculator.read();
+alert( "Сумма=" + calculator.sum() );
+alert( "Произведение=" + calculator.mul() );
