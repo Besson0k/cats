@@ -1,12 +1,17 @@
-var user = { firstName: 'Vasya'};
-var admin = { firstName: 'Admin'};
+var ladder = {
+    step: 0,
+    up: function() {
+        this.step++;
+        return this;
+    },
+    down: function() {
+        this.step--;
+        return this;
+    },
+    showStep: function() {
+        alert( this.step );
+        return this;
+    }
+};
 
-function func() {
-    alert ( this.firstName );
-}
-
-user.f = func;
-admin.g = func;
-
-user.f();
-admin.g();
+ladder.up().up().down().up().down().showStep();
