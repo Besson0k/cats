@@ -1,16 +1,11 @@
-function Calculator(a, b) {
-    this.read = function() {
-        this.a = +prompt("a?", 0);
-        this.b = +prompt("b?", 0);
-    };
-    this.sum = function() {
-        return this.a + this.b;
-    } ;
-    this.mul = function() {
-        return this.a * this.b;
+function Accumulator(startingValue) {
+    this.value = startingValue;
+    this.read = function () {
+        this.value = +prompt("???", 0);
     }
 }
-var calculator = new Calculator();
-calculator.read();
-alert( "Сумма=" + calculator.sum() );
-alert( "Произведение=" + calculator.mul() );
+
+var accumulator = new Accumulator(1);
+accumulator.read();
+accumulator.read();
+alert( accumulator.value );
