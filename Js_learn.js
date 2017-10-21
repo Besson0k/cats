@@ -1,8 +1,7 @@
-function printArgs() {
-    var join = [].join;
-
-    var argStr = join.call(arguments, ':');
-    alert( argStr );
+function sumArgs() {
+    return [].reduce.call(arguments, function (a, b) {
+        return a + b;
+    });
 }
 
-printArgs(1, 2, 3);
+alert( sumArgs(1, 2, 3) );
