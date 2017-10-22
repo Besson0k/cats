@@ -1,14 +1,15 @@
 'use strict';
-function bind(func, context) {
-    return function() { // (*)
-        return func.apply(context, arguments);
+function bind(func, contest) {
+    return function () {
+        return func.apply (contest, arguments);
     };
 }
 
-function f(a, b) {
-    alert( this );
-    alert( a + b );
-}
+var user = {
+    firstName: "Vasya",
+    sayHi: function () {
+        alert( this.firstName);
+    }
+};
 
-var g = bind(f, "Context");
-g(1, 2);
+setTimeout(bind(user.sayHi, user), 1000);
