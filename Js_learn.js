@@ -7,9 +7,13 @@ function bind(func, contest) {
 
 var user = {
     firstName: "Vasya",
-    sayHi: function () {
-        alert( this.firstName);
+    sayHi: function (who) {
+        alert( this.firstName + ": Hi, " + who);
     }
 };
 
-setTimeout(bind(user.sayHi, user), 1000);
+var sayHi = bind(user.sayHi, user);
+
+sayHi("Janny");
+sayHi("Petya");
+sayHi("Olga");
