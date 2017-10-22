@@ -1,7 +1,6 @@
-function f(a, b) {
-    alert( this);
-    alert( a + b );
-}
-
-var g = f.bind("Contest");
-g(1, 3);
+var user = {
+    firstName: "Vasya",
+    sayHi: function () {
+        alert( this.firstName);
+    }
+};setTimeout(user.sayHi.bind(user), 1000);
