@@ -1,23 +1,22 @@
-function work(a) {
-
+function work(a, b) {
+    alert( a + b );
 }
 
-function makeLogging(f, log) {
-    function help(a) {
-        log.push(a);
-        return f.call(this, a);
+function makeLogging(f, log) { 
+    function help() {
+        log.push([].slice.call(arguments));
+        return f.apply(this, arguments);
     }
     return help;
 }
+
 var log = [];
 work = makeLogging(work, log);
 
-work(1);
-work(5);
-work(3);
-work(10);
+work(1, 2); // 3
+work(4, 5); // 9
 
 for (var i = 0; i < log.length; i++) {
-    alert( "Log:" + log[i] );
+    var args = log[i];
+    alert( 'Лог:' + args.join() );
 }
-
