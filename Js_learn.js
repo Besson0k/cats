@@ -1,26 +1,23 @@
-"use strict";
+var timers = {};
 
-function ask(question, answer, ok, fail) {
-    var result = prompt(question, '');
-    if (result.toLowerCase() == answer.toLowerCase()) ok();
-    else fail();
+function timingDecorator(f, timer) {
+    return function () {
+        var start = performance.now();
+        var result = f.apply(this, arguments);
+        if (!timers[timer]) timers[timer] = 0;
+        timers[timer] += performance.now() - start;
+
+        return result;
+    }
 }
 
-var user = {
-    login: 'Василий',
-    password: '12345',
-
-    loginOk: function() {
-        alert( this.login + ' вошёл в сайт' );
-    },
-
-    loginFail: function() {
-        alert( this.login + ': ошибка входа' );
-    },
-
-    checkPassword: function() {
-        ask("Ваш пароль?", this.password, this.loginOk.bind(this), this.loginFail.bind(this));
-    }
+fibonacci = function f(n) {
+    return (n > 2) ? f(n - 1) + f(n - 2) : 1;
 };
 
-user.checkPassword();
+fibonacci = timingDecorator(fibonacci, "fibo");
+
+alert(fibonacci(10));
+alert(fibonacci(20));
+
+alert(timers.fibo + 'ms');
