@@ -1,19 +1,7 @@
-'use strict';
-function bind(func, contest) {
-    return function () {
-        return func.apply (contest, arguments);
-    };
+function f(a, b) {
+    alert( this);
+    alert( a + b );
 }
 
-var user = {
-    firstName: "Vasya",
-    sayHi: function (who) {
-        alert( this.firstName + ": Hi, " + who);
-    }
-};
-
-var sayHi = bind(user.sayHi, user);
-
-sayHi("Janny");
-sayHi("Petya");
-sayHi("Olga");
+var g = f.bind("Contest");
+g(1, 3);
