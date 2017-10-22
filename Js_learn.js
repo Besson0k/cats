@@ -1,23 +1,24 @@
-var timers = {};
-
-function timingDecorator(f, timer) {
+function checkNumber(value) {
+    return typeof value == 'number';
+}
+function typeCheck(f, checks) {
     return function () {
-        var start = performance.now();
-        var result = f.apply(this, arguments);
-        if (!timers[timer]) timers[timer] = 0;
-        timers[timer] += performance.now() - start;
-
-        return result;
+        for (var i = 0; i < arguments.length; i++) {
+            if (!checks[i](arguments[i])){
+                alert("Nocorrect arguments № " + (+i+1));
+                return;
+            }
+        }
+        return f.apply(this, arguments);
     }
 }
 
-fibonacci = function f(n) {
-    return (n > 2) ? f(n - 1) + f(n - 2) : 1;
-};
+function sum(a, b) {
+    return a + b;
+}
 
-fibonacci = timingDecorator(fibonacci, "fibo");
+sum = typeCheck(sum, [checkNumber, checkNumber]);
 
-alert(fibonacci(10));
-alert(fibonacci(20));
-
-alert(timers.fibo + 'ms');
+alert( sum(1,3) );
+sum(true, null);
+sum(1, ["array", "in", "sum!?"]);
