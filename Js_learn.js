@@ -1,15 +1,26 @@
+"use strict";
+
 function ask(question, answer, ok, fail) {
     var result = prompt(question, '');
     if (result.toLowerCase() == answer.toLowerCase()) ok();
     else fail();
 }
 
-ask("Выпустить птичку?", "да", fly, die);
+var user = {
+    login: 'Василий',
+    password: '12345',
 
-function fly() {
-    alert( 'улетела :)' );
-}
+    loginOk: function() {
+        alert( this.login + ' вошёл в сайт' );
+    },
 
-function die() {
-    alert( 'птичку жалко :(' );
-}
+    loginFail: function() {
+        alert( this.login + ': ошибка входа' );
+    },
+
+    checkPassword: function() {
+        ask("Ваш пароль?", this.password, this.loginOk.bind(this), this.loginFail.bind(this));
+    }
+};
+
+user.checkPassword();
