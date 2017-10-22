@@ -1,20 +1,13 @@
-function sum() {
-    return [].reduce.call(arguments, function (a, b) {
-        return a + b;
-    });
+function blind(func, context) {
+    return function () {
+        return func.apply(context, arguments);
+    };
 }
 
-function mul() {
-    return [].reduce.call(arguments, function (a, b) {
-        return a * b;
-    })
+function f() {
+    alert (this);
 }
 
-function applyAll(func) {
-    return func.apply(this, [].slice.call(arguments, 1));
-}
+var g = blind(f, "Context");
 
-alert( applyAll(sum, 1, 2, 3) );
-alert( applyAll(mul, 2, 3, 4) );
-alert( applyAll(Math.max, 2, -2, 3) );
-alert( applyAll(Math.min, 2, -2, 3) );
+g();
