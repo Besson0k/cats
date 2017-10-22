@@ -1,22 +1,24 @@
-function work(a, b) {
-    alert( a + b );
+function f(x) {
+    return Math.random() * x;
 }
 
-function makeLogging(f, log) { 
-    function help() {
-        log.push([].slice.call(arguments));
-        return f.apply(this, arguments);
-    }
-    return help;
+function makeCaching(f) { 
+    var cach = {};
+    return function(x) {
+        if (!(x in cach)) {
+            cach[x] = f.call(this, x);
+        }
+        return cach[x];
+    };
 }
 
-var log = [];
-work = makeLogging(work, log);
+f = makeCaching(f);
 
-work(1, 2); // 3
-work(4, 5); // 9
+var a, b;
 
-for (var i = 0; i < log.length; i++) {
-    var args = log[i];
-    alert( 'Лог:' + args.join() );
-}
+a = f(1);
+b = f(1);
+alert( a == b );
+
+b = f(2);
+alert( a == b );
